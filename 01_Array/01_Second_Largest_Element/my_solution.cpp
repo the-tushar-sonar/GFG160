@@ -15,7 +15,7 @@ int secondLargest(vector<int> &arr)
             largest = arr[i];
         }
 
-        if (arr[i] < largest && arr[i] > secondLargest)
+        else if (arr[i] < largest && arr[i] > secondLargest)
         {
             secondLargest = arr[i];
         }
