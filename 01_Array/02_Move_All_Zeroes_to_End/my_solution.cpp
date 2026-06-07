@@ -1,35 +1,50 @@
+#include <climits>
 #include <iostream>
 #include <set>
 #include <vector>
 using namespace std;
 
 // Optimal
-/*
 void pushZerosToEnd(vector<int> &arr)
 {
     int n = arr.size();
     int i = 0;
     for (int j = 1; j < n; j++)
     {
-        cout << "iteration: " << j - 1 << endl;
-        if (arr[j] == 0)
+        // cout << "iteration: " << j << endl;
+        // cout << "Before :" << endl;
+        // cout << "i: " << i << endl;
+        // cout << "j: " << "at " << j << " is " << arr[j] << endl;
+        if (arr[i] == 0 && arr[j] == 0)
         {
-            arr[i] = arr[j];
-            cout << "i: " << arr[i] << endl;
-            cout << "j: " << arr[j] << endl;
+            continue;
         }
-
+        else if (arr[j] == 0)
+        {
+            i = j;
+        }
         else if (arr[i] == 0 && arr[j] != 0)
         {
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+            // cout << "swap: " << endl;
+            swap(arr[i], arr[j]);
+            i++;
         }
+
+        // cout << "After :" << endl;
+        // cout << "i: " << i << endl;
+        // cout << "j: " << "at " << j << " is " << arr[j] << endl;
     }
+    for (int x : arr)
+    {
+        cout << x << " ";
+    }
+    cout << endl;
 }
-*/
+/*
+ */
 
 // Brute Force
+/*
 void pushZerosToEnd(vector<int> &arr)
 {
     int n = arr.size();
@@ -49,14 +64,25 @@ void pushZerosToEnd(vector<int> &arr)
     }
     cout << endl;
 }
+*/
 
 int main()
 {
 
-    vector<int> arr = {1, 2, 0, 5, 0};
-
+    vector<int> arr = {0, 1, 2, 3};
     pushZerosToEnd(arr);
-
+    vector<int> arr1 = {1, 2, 3, 0};
+    pushZerosToEnd(arr1);
+    vector<int> arr2 = {0, 0, 1, 2};
+    pushZerosToEnd(arr2);
+    vector<int> arr3 = {1, 0, 0, 2};
+    pushZerosToEnd(arr3);
+    vector<int> arr4 = {0, 0, 0};
+    pushZerosToEnd(arr4);
+    vector<int> arr5 = {1, 2, 3};
+    pushZerosToEnd(arr5);
+    vector<int> arr6 = {0, 1, 0, 2, 0, 3};
+    pushZerosToEnd(arr6);
 
     return 0;
 }
