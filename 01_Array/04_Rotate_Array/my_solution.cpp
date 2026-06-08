@@ -3,13 +3,14 @@ using namespace std;
 
 // Temporary Array
 // Time Complexity => O(n), Space Complexity => O(n)
+/*
 void rotateArr(vector<int> &arr, int d)
 {
     int n = arr.size();
     d %= n;
-    
+
     vector<int> temp(arr.begin(), arr.begin() + d);
-    
+
     for (int i = d; i < n; i++)
     {
         arr[i - d] = arr[i];
@@ -17,6 +18,7 @@ void rotateArr(vector<int> &arr, int d)
 
     copy(temp.begin(), temp.end(), arr.begin() + (n - d));
 }
+*/
 
 // Repeated Left Shift
 // Time Complexity => O(n^2), Space Complexity => O(1)
@@ -35,6 +37,18 @@ void rotateArr(vector<int> &arr, int d)
     }
 }
 */
+
+// Reversal Algorithm
+// Time Complexity => O(n), Space Complexity => O(1)
+void rotateArr(vector<int> &arr, int d)
+{
+    int n = arr.size();
+    d %= n;
+
+    reverse(arr.begin(), arr.begin() + d); // O(n)
+    reverse(arr.begin() + d, arr.end());   // O(n)
+    reverse(arr.begin(), arr.end());       // O(n)
+}
 
 int main()
 {
