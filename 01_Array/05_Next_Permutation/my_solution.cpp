@@ -2,6 +2,7 @@
 #include <span>
 using namespace std;
 
+/*
 void nextPermutation(vector<int> &arr)
 {
     int n = arr.size();
@@ -25,7 +26,7 @@ void nextPermutation(vector<int> &arr)
 
     int target = arr[x];
     int answer = INT_MAX;
-    int answerIndex;
+    int answerIndex = -1;
 
     for (int i = x + 1; i < n; i++)
     {
@@ -51,6 +52,41 @@ void nextPermutation(vector<int> &arr)
     //     cout << x << " ";
     // }
     // cout << endl;
+}
+*/
+
+void nextPermutation(vector<int> &arr)
+{
+    int n = arr.size();
+    int x = -1;
+    for (int i = n - 2; i >= 0; i--)
+    {
+        if (arr[i] < arr[i + 1])
+        {
+            x = i;
+            break;
+        }
+    }
+
+    if (x == -1)
+    {
+        reverse(arr.begin(), arr.end());
+        return;
+    }
+    int target = arr[x];
+    int answerIndex = -1;
+    for (int i = n - 1; i > x; i--)
+    {
+        if (arr[i] > target)
+        {
+            answerIndex = i;
+            break;
+        }
+    }
+
+    swap(arr[x], arr[answerIndex]);
+
+    reverse(arr.begin() + x + 1, arr.end());
 }
 
 int main()
