@@ -2,6 +2,7 @@
 using namespace std;
 
 // Brute Force --> O(n²) time & O(1) space
+/*
 vector<int> findMajority(vector<int> &arr)
 {
     int n = arr.size();
@@ -31,6 +32,31 @@ vector<int> findMajority(vector<int> &arr)
                 }
             }
         }
+    }
+
+    sort(ans.begin(), ans.end());
+
+    return ans;
+}
+*/
+
+// Better => Using Hash
+vector<int> findMajority(vector<int> &arr)
+{
+    int n = arr.size();
+    int limit = n / 3;
+    vector<int> ans;
+    unordered_map<int, int> freq;
+
+    for (int x : arr)
+    {
+        freq[x]++;
+    }
+
+    for (const auto &[num, count] : freq)
+    {
+        if (count > limit)
+            ans.push_back(num);
     }
 
     sort(ans.begin(), ans.end());
