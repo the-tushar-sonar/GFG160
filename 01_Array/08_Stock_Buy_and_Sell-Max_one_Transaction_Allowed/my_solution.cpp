@@ -22,20 +22,17 @@ int maxProfit(vector<int> &prices)
 }
 */
 
-// Optimal => Time: O(n) Space: O(1) 
+// Optimal => Time: O(n) Space: O(1)
 int maxProfit(vector<int> &prices)
 {
-    int n = prices.size();
-    int profit = 0;
     int maxProfit = 0;
     int minPrice = INT_MAX;
 
-    for (int i = 0; i < n; i++)
+    for (int price : prices)
     {
-        minPrice = min(minPrice, prices[i]);
+        minPrice = min(minPrice, price);
 
-        profit = prices[i] - minPrice;
-        maxProfit = max(maxProfit, profit);
+        maxProfit = max(maxProfit, price - minPrice);
     }
     // cout << "Max Profit : " << maxProfit << endl;
 
