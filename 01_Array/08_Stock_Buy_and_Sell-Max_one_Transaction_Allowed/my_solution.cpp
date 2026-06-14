@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Brute Force => Time: O(n²)
+// Brute Force => Time: O(n²) Space: O(1)
+/*
 int maxProfit(vector<int> &prices)
 {
     int n = prices.size();
@@ -16,15 +17,36 @@ int maxProfit(vector<int> &prices)
             maxprofit = max(maxprofit, profit);
         }
     }
-    cout << "Max Profit : " << maxprofit << endl;
-    return 0;
+    // cout << "Max Profit : " << maxprofit << endl;
+    return maxprofit;
+}
+*/
+
+// Optimal => Time: O(n) Space: O(1) 
+int maxProfit(vector<int> &prices)
+{
+    int n = prices.size();
+    int profit = 0;
+    int maxProfit = 0;
+    int minPrice = INT_MAX;
+
+    for (int i = 0; i < n; i++)
+    {
+        minPrice = min(minPrice, prices[i]);
+
+        profit = prices[i] - minPrice;
+        maxProfit = max(maxProfit, profit);
+    }
+    // cout << "Max Profit : " << maxProfit << endl;
+
+    return maxProfit;
 }
 
 int main()
 {
-    // vector<int> prices = {7, 10, 1, 3, 6, 9, 2};
+    vector<int> prices = {7, 10, 1, 3, 6, 9, 2};
     // vector<int> prices = {7, 6, 4, 3, 1};
-    vector<int> prices = {1, 3, 6, 9, 11};
+    // vector<int> prices = {1, 3, 6, 9, 11};
 
     maxProfit(prices);
 
