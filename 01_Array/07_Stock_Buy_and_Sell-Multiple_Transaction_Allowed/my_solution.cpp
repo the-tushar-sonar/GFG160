@@ -3,28 +3,15 @@ using namespace std;
 
 int maxProfit(vector<int> &prices)
 {
-    // for (int price : prices)
-    // {
-    //     cout << price << " ";
-    // }
-    // cout << endl;
-
-    int n = prices.size();
-    int profit = 0;
     int totalProfit = 0;
 
-    for (int i = 1; i < n; i++)
+    for (int i = 1; i < prices.size(); i++)
     {
         if (prices[i] > prices[i - 1])
         {
-            profit = prices[i] - prices[i - 1];
-            // cout << profit << " ";
-            totalProfit += profit;
+            totalProfit += prices[i] - prices[i - 1];
         }
     }
-
-    cout << "Total Profit: " << totalProfit << endl;
-
     return totalProfit;
 }
 
