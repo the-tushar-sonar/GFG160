@@ -88,48 +88,29 @@ using namespace std;
 
 int getMinDiff(vector<int> &arr, int k)
 {
-    int minX = INT_MAX;
-    int maxX = INT_MIN;
+    sort(arr.begin(), arr.end());
+
     int n = arr.size();
-    int ans = 0;
-    int fAns = INT_MAX;
+    int ans = arr[n - 1] - arr[0];
 
-    int diff = arr[n - 1] - arr[0];
-
-    if (diff <= k)
+    for (int i = 0; i < n - 1; i++)
     {
-        for (int i = 0; i < n; i++)
+        if (arr[i + 1] - k >= 0)
         {
-            arr[i] += k;
-            minX = min(minX, arr[i]);
-            maxX = max(maxX, arr[i]);
-        }
+            int minX = min(arr[0] + k, arr[i + 1] - k);
+            int maxX = max(arr[i] + k, arr[n - 1] - k);
+            // cout << "i=" << i
+            //      << " minX=" << minX
+            //      << " maxX=" << maxX
+            //      << " diff=" << maxX - minX
+            //      << endl;
 
-        ans = maxX - minX;
-        // cout << "Solution: " << ans << endl;
-
-        return ans;
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        if (arr[i + 1] - k >= 0 && arr[n - 1] - k >= 0)
-        {
-            minX = min(arr[0] + k, arr[i + 1] - k);
-            maxX = max(arr[i] + k, arr[n - 1] - k);
-            // cout
-            //     << "Min : " << minX << "\tMax : " << maxX << endl;
-            ans = maxX - minX;
-            fAns = min(fAns, ans);
-            // cout << "Solution: " << ans << endl;
+            ans = min(ans, maxX - minX);
         }
     }
-    // cout << endl;
-    // cout << "Final : " << fAns << endl;
-    if (diff < fAns)
-        return diff;
+    // cout << "Solution : " << ans << endl;
 
-    return fAns;
+    return ans;
 }
 
 struct TestCase
@@ -171,19 +152,17 @@ int main()
         int ans = getMinDiff(test.arr, test.k);
 
         if (ans == test.expected)
-            cout << "PASS\n"
-                 << endl;
+            cout << "PASS\n";
         else
             cout << "FAIL Expected: "
                  << test.expected
                  << " Got: "
                  << ans
-                 << "\n"
-                 << endl;
+                 << "\n";
     }
 
-    // vector<int> arr = {1, 2, 3, 4, 5};
-    // int k = 3;
+    // vector<int> arr = {10, 1, 15, 14, 14, 14};
+    // int k = 6;
     // getMinDiff(arr, k);
 
     return 0;
