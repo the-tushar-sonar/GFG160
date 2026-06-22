@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
 // Brute Force
 int maxProduct(vector<int> &arr)
 {
@@ -30,8 +31,31 @@ int maxProduct(vector<int> &arr)
     }
     return maxP;
 }
+*/
 
+// Optimal Approach => O(n) time & O(1) space
+int maxProduct(vector<int> &arr)
+{
+    int n = arr.size();
+    int maxEnding = arr[0];
+    int minEnding = arr[0];
+    int ans = arr[0];
+    // cout << "i\t" << "arr[i]\t" << "Max\t" << "Min" << endl;
+    for (int i = 1; i < n; i++)
+    {
+        int prevMax = maxEnding;
+        int prevMin = minEnding;
 
+        maxEnding = max({arr[i], (prevMax * arr[i]), (prevMin * arr[i])});
+        minEnding = min({arr[i], (prevMax * arr[i]), (prevMin * arr[i])});
+        // cout << i << "\t" << arr[i] << "\t" << maxEnding << "\t" << minEnding << endl;
+
+        ans = max(ans, maxEnding);
+    }
+
+    // cout << "Max : " << ans << endl;
+    return ans;
+}
 
 struct TestCase
 {
