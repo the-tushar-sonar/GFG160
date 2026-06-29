@@ -15,9 +15,10 @@ int missingPositive(vector<int> &arr)
 
     cout << nthSum - sum << endl;
     return 0;
-    }
-    */
+}
+ */
 
+/*
 int missingNumber(vector<int> &arr)
 {
     int n = arr.size();
@@ -39,22 +40,57 @@ int missingNumber(vector<int> &arr)
 
     return i + 1;
 }
+ */
 
-// int missingNumber(vector<int> &arr)
-// {
-//     int n = arr.size();
-//     int idx = 0;
-//     while (arr[idx] <= n && arr[idx] >= 1)
-//     {
-//         if (idx + 1 != arr[idx])
-//             swap(arr[idx], arr[arr[idx] - 1]);
+void printVecArr(vector<int> &arr)
+{
+    for (int num : arr)
+    {
+        cout << num << " ";
+    }
+    cout << endl;
+}
 
-//         if (idx + 1 == arr[idx])
-//             idx++;
-//     }
+int missingNumber(vector<int> &arr)
+{
+    int n = arr.size();
+    int i = 0;
+    int count = 0;
 
-//     return 0;
-// }
+    // printVecArr(arr);
+
+    while (i < n)
+    {
+        int val = arr[i];
+        // cout << "\nPass : " << count << endl;
+        // cout << "current : " << val << endl;
+        if (val < 1 || val > n || val == i + 1 || val == arr[val - 1])
+        {
+            i++;
+        }
+        else
+        {
+            // cout << "swap " << val << " with " << arr[val - 1] << endl;
+            swap(arr[i], arr[val - 1]);
+        }
+
+        count++;
+    }
+
+    // printVecArr(arr);
+
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] != i + 1)
+        {
+            // cout << "Ans : " << i + 1 << endl;
+            // break;
+            return i + 1;
+        }
+    }
+
+    return n + 1;
+}
 
 struct TestCase
 {
@@ -144,14 +180,14 @@ int main()
         cout << endl;
     }
 
-    // vector<int> arr = {2, -3, 4, 1, 1, 7};
-    // missingNumber(arr);
+    //    vector<int> arr = {2, -3, 4, 1, 1, 7};
+    //    missingNumber(arr);
 
-    // vector<int> arr1 = {5, 3, 2, 5, 1};
-    // missingNumber(arr1);
+    //     vector<int> arr1 = {5, 3, 2, 5, 1};
+    //     missingNumber(arr1);
 
-    // vector<int> arr2 = {-8, 0, -1, -4, -3};
-    // missingNumber(arr2);
+    //     vector<int> arr2 = {-8, 0, -1, -4, -3};
+    //     missingNumber(arr2);
 
     return 0;
 }
