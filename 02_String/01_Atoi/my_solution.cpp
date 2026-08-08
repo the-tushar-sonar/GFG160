@@ -17,20 +17,23 @@ int myAtoi(string s)
     {
         if (s[idx] == '-')
             sign = -1;
+
         idx++;
     }
 
     // Construct the number digit by digit
     while (idx < s.size() && s[idx] >= '0' && s[idx] <= '9')
     {
+        int digit = s[idx]-'0';
+
         // handling overflow/underflow
-        if (ans > INT_MAX / 10 || (ans == INT_MAX / 10 && s[idx] - '0' > 7))
+        if (ans > INT_MAX / 10 || (ans == INT_MAX / 10 && digit > 7))
         {
             return sign == 1 ? INT_MAX : INT_MIN;
         }
 
         // Append current digit to the answer
-        ans = 10 * ans + (s[idx] - '0');
+        ans = 10 * ans + digit;
 
         idx++;
     }
