@@ -1,6 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Using Hash => O(n+m)
+bool areAnagrams(string &s1, string &s2)
+{
+    if (s1.size() != s2.size())
+        return false;
+
+    int freq[26] = {0};
+
+    for (char c : s1)
+    {
+        freq[c - 'a']++;
+    }
+
+    for (char c : s2)
+    {
+        freq[c - 'a']--;
+    }
+
+    for (int i = 0; i < 26; i++)
+    {
+        if (freq[i] != 0)
+        {
+            return false;
+            // cout << "NOT a Anagrams" << endl;
+            // break;
+        }
+    }
+    return true;
+    // cout << "YES a Anagram" << endl;
+}
+
+// Using Sort => O(n log n + m log m)
+/*
 bool areAnagrams(string &s1, string &s2)
 {
     sort(s1.begin(), s1.end());
@@ -22,9 +55,10 @@ bool areAnagrams(string &s1, string &s2)
         // count++;
     }
     // if (count == s1.size())
-        // cout << "This Anagram" << endl;
-        return true;
+    // cout << "This Anagram" << endl;
+    return true;
 }
+*/
 struct TestCase
 {
     string s1, s2;
