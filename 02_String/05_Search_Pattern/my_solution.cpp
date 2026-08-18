@@ -1,78 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// vector<int> search(string &pat, string &txt)
-// void search(string &pat, string &txt)
-// {
-//     // cout << "txt : " << txt << endl;
-//     // cout << "pat : " << pat << endl;
-
-//     vector<int> result;
-//     int count = 0;
-//     for (int i = 0; i < txt.size(); i++)
-//     {
-//         result.push_back(i);
-//         for (int j = 0; j < pat.size(); j++)
-//         {
-//             cout << "\n"
-//                  << txt[j] << "\t" << pat[j];
-//             if (txt[i] == pat[j])
-//             {
-//                 cout << "\t" << count << endl;
-//                 count++;
-//                 break;
-//             }
-
-//             if (txt[j] != pat[j])
-//             {
-//                 cout << "\tNot matching..." << endl;
-//                 break;
-//             }
-//         }
-//         if (count == pat.size())
-//         {
-//             result.push_back(i);
-//             count = 0;
-//         }
-//     }
-
-//     for (int num : result)
-//     {
-//         cout << "num :" << num << " ";
-//     }
-//     cout << endl;
-// }
-
-void search(string &pat, string &txt)
+// Brute Force => O(n*m)
+vector<int> search(string &pat, string &txt)
 {
     vector<int> result;
-    int count = 0;
 
     for (int i = 0; i < txt.size(); i++)
     {
-        cout << "\n========================================\n";
-        cout << "Starting from text index i = " << i << endl;
-        cout << "========================================\n";
+        int count = 0;
+
+        if (i > (txt.size() - pat.size()))
+            break;
+
+        // cout << "Starting from text index i = " << i << endl;
 
         for (int j = 0; j < pat.size(); j++)
         {
-            cout << "i = " << i
-                 << ", j = " << j
-                 << " | txt[" << i + j << "] = '" << txt[i + j] << "'"
-                 << " | pat[" << j << "] = '" << pat[j] << "'";
+            // cout << "i = " << i
+            //      << ", j = " << j
+            //      << " | txt[" << i + j << "] = '" << txt[i + j] << "'"
+            //      << " | pat[" << j << "] = '" << pat[j] << "'";
 
             if (txt[i + j] == pat[j])
             {
                 count++;
-                cout << " --> MATCH"
-                     << " | count = " << count << endl;
-
-                // break;
+                // cout << " -> MATCH"
+                //      << " | count = " << count << endl;
             }
             else
             {
-                cout << " --> NOT MATCH"
-                     << " | count = " << count << endl;
+                // cout << " -> NOT MATCH"
+                //      << " | count = " << count << endl;
 
                 break;
             }
@@ -80,28 +39,38 @@ void search(string &pat, string &txt)
 
         if (count == pat.size())
         {
-            cout << ">>> PATTERN FOUND at index " << i << endl;
+            // cout << ">> PATTERN FOUND at index " << i << endl;
 
             result.push_back(i);
-            count = 0;
         }
     }
 
-    cout << "\nFinal result: ";
+    // cout << "\nFinal result: ";
 
-    for (int num : result)
-    {
-        cout << num << " ";
-    }
+    // for (int num : result)
+    // {
+    //     cout << num << " ";
+    // }
 
-    cout << endl;
+    // cout << endl;
+    return result;
 }
 int main()
 {
-    string txt = "geeksforgeeks";
-    string pat = "geek";
+    // string txt = "aacabdc";
+    // string pat = "aab";
+    // string txt = "geeksforgeeks";
+    // string pat = "geek";
+    string txt = "aaaaa";
+    string pat = "aa";
 
-    search(pat, txt);
+    vector<int> ans = search(pat, txt);
+
+    for (int n : ans)
+    {
+        cout << n << " ";
+    }
+    cout << endl;
 
     return 0;
 }
