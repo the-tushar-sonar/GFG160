@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Brute Force / Repeated Rotation
+/*
 bool areRotations(string &s1, string &s2)                   // O(n²)
 {
     string rot = s1;
@@ -17,6 +19,20 @@ bool areRotations(string &s1, string &s2)                   // O(n²)
     // cout << "False" << endl;
     return false;
 }
+*/
+
+// String Concatenation + Substring Search
+bool areRotations(string &s1, string &s2)
+{
+    if (s1.length() != s2.length())
+        return false;
+
+    string temp = s1 + s1;
+
+    return temp.find(s2) != string::npos;
+}
+// KMP Pattern Matching
+// In-place / Constant-Space Rotation Matching
 
 int main()
 {
