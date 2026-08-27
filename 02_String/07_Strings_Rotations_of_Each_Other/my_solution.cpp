@@ -35,6 +35,8 @@ bool areRotations(string &s1, string &s2)
 */
 
 // KMP Pattern Matching
+/*
+// Getting TLE
 void constructLps(string &pat, vector<int> &lps)
 {
     int len = 0;
@@ -71,7 +73,7 @@ bool areRotations(string &s1, string &s2)
 
     int m = s2.length();
     vector<int> lps(m);
-    
+
     constructLps(s2, lps);
 
     string combined = s1 + s1;
@@ -107,13 +109,77 @@ bool areRotations(string &s1, string &s2)
     // cout << "False" << endl;
     return false;
 }
+*/
+
+void constructLps(string &pat, vector<int> &lps)
+{
+    int len = 0;
+    int i = 1;
+
+    while (i < pat.length())
+    {
+        if (pat[i] == pat[len])
+        {
+            lps[i] = ++len;
+            i++;
+        }
+        else if (len != 0)
+        {
+            len = lps[len - 1];
+        }
+        else
+        {
+            lps[i] = 0;
+            i++;
+        }
+    }
+}
+
+bool areRotations(string &s1, string &s2)
+{
+    // Edge case
+    if (s1.length() != s2.length())
+        return false;
+
+    string txt = s1 + s1;
+    int n = txt.length();
+    int m = s2.length();
+
+    vector<int> lps(m);
+    constructLps(s2, lps);
+
+    int i = 0;
+    int j = 0;
+
+    while (i < n)
+    {
+
+        if (txt[i] == s2[j])
+        {
+            i++;
+            j++;
+
+            if (j == m)
+                return true;
+        }
+        if (i < n && txt[i] != s2[j])
+        {
+            if (j != 0)
+                j = lps[j - 1];
+            else
+                i++;
+        }
+    }
+
+    return false;
+}
 
 // In-place / Constant-Space Rotation Matching
 
 int main()
 {
-        string s1 = "abcd";
-        string s2 = "cdab";
+    string s1 = "abcd";
+    string s2 = "cdab";
 
     // string s1 = "abcd";
     // string s2 = "cdba";
